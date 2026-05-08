@@ -15,14 +15,13 @@ pipeline {
             }
         }
 
-        stage('Stop Old Container') {
+        stage('Remove Old Container') {
             steps {
-                bat 'docker stop ecommerce-container || exit 0'
-                bat 'docker rm ecommerce-container || exit 0'
+                bat 'docker rm -f ecommerce-container'
             }
         }
 
-        stage('Run Docker Container') {
+        stage('Run Container') {
             steps {
                 bat 'docker run -d -p 5000:5000 --name ecommerce-container ecommerce-app'
             }

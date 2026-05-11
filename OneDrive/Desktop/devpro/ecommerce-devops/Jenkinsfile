@@ -1,5 +1,11 @@
+```groovy
 pipeline {
     agent any
+
+    environment {
+        IMAGE_NAME = "ecommerce-app"
+        CONTAINER_NAME = "ecommerce-container"
+    }
 
     stages {
 
@@ -11,20 +17,35 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t ecommerce-app .'
+                sh 'docker build -t $IMAGE_NAME .'
             }
         }
 
-        stage('Remove Old Container') {
+        stage('Run Docker Container') {
             steps {
-                bat 'docker rm -f ecommerce-container'
+                sh '''
+                docker stop $CONTAINER_NAME || true
+                docker rm $CONTAINER_NAME || true
+                docker run -d --name $CONTAINER_NAME -p 3000:3000 $IMAGE_NAME
+                '''
             }
         }
 
-        stage('Run Container') {
+        stage('Verify Deployment') {
             steps {
-                bat 'docker run -d -p 5000:5000 --name ecommerce-container ecommerce-app'
+                sh 'docker ps'
             }
         }
     }
+
+    post {
+        success {
+            echo 'Project deployed successfully!'
+        }
+
+        failure {
+            echo 'Build failed!'
+        }
+    }
 }
+```

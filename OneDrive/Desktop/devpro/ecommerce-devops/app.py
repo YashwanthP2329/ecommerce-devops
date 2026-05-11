@@ -11,6 +11,7 @@ products = [
     {"name": "DSLR Camera", "price": "₹65000"}
 ]
 
+
 @app.route('/')
 def home():
     return render_template('index.html', products=products)

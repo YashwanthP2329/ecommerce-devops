@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Store</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#f4f6f9;
+        }
+
+        /* Navbar */
+
+        .navbar{
+            background:#111827;
+            color:white;
+            padding:20px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .navbar h1{
+            color:#00df9a;
+        }
+
+        .navbar ul{
+            list-style:none;
+            display:flex;
+            gap:20px;
+        }
+
+        .navbar a{
+            text-decoration:none;
+            color:white;
+            font-weight:bold;
+        }
+
+        /* Hero Section */
+
+        .hero{
+            height:300px;
+            background:linear-gradient(to right,#1e3c72,#2a5298);
+            color:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            flex-direction:column;
+            text-align:center;
+        }
+
+        .hero h2{
+            font-size:45px;
+            margin-bottom:10px;
+        }
+
+        .hero p{
+            font-size:20px;
+        }
+
+        /* Product Section */
+
+        .products{
+            padding:50px;
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:30px;
+        }
+
+        .card{
+            background:white;
+            border-radius:15px;
+            padding:20px;
+            text-align:center;
+            box-shadow:0px 4px 10px rgba(0,0,0,0.1);
+            transition:0.3s;
+        }
+
+        .card:hover{
+            transform:translateY(-10px);
+        }
+
+        .card img{
+            width:100%;
+            height:220px;
+            object-fit:cover;
+            border-radius:10px;
+        }
+
+        .card h3{
+            margin-top:15px;
+            color:#111827;
+        }
+
+        .price{
+            color:green;
+            font-size:22px;
+            margin:10px 0;
+        }
+
+        button{
+            background:#00df9a;
+            color:white;
+            border:none;
+            padding:12px 20px;
+            border-radius:8px;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+        button:hover{
+            background:#00b37e;
+        }
+
+        /* Footer */
+
+        footer{
+            background:#111827;
+            color:white;
+            text-align:center;
+            padding:20px;
+            margin-top:40px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <div class="navbar">
+        <h1>ShopEasy</h1>
+
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Cart</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+
+    <div class="hero">
+        <h2>Welcome to ShopEasy</h2>
+        <p>Best Deals on Electronics and devices</p>
+    </div>
+
+    <!-- Products -->
+
+    <div class="products">
+
+        {% for product in products %}
+
+        <div class="card">
+
+            <img src="https://picsum.photos/300/220?random={{ loop.index }}" alt="product">
+
+            <h3>{{ product.name }}</h3>
+
+            <div class="price">
+                {{ product.price }}
+            </div>
+
+            <button>Add to Cart</button>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <!-- Footer -->
+
+    <footer>
+        <p>© 2026 ShopEasy. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

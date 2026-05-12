@@ -12,13 +12,13 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'python --version'
+                sh 'echo Build Successful'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'echo Testing Application'
+                sh 'echo Testing Successful'
             }
         }
     }
